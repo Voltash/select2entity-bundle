@@ -2,7 +2,7 @@
 
 namespace Tetranz\Select2EntityBundle\Form\DataTransformer;
 
-use Doctrine\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -17,7 +17,7 @@ use Symfony\Component\PropertyAccess\PropertyAccessor;
  */
 class EntityToPropertyTransformer implements DataTransformerInterface
 {
-    /** @var ObjectManager */
+    /** @var EntityManagerInterface */
     protected $em;
     /** @var  string */
     protected $className;
@@ -39,7 +39,7 @@ class EntityToPropertyTransformer implements DataTransformerInterface
      * @param string                 $primaryKey
      * @param string                 $newTagPrefix
      */
-    public function __construct(ObjectManager $em, $class, $textProperty = null, $primaryKey = 'id', $newTagPrefix = '__', $newTagText = ' (NEW)')
+    public function __construct(EntityManagerInterface $em, $class, $textProperty = null, $primaryKey = 'id', $newTagPrefix = '__', $newTagText = ' (NEW)')
     {
         $this->em = $em;
         $this->className = $class;
